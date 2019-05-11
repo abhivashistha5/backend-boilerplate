@@ -4,7 +4,7 @@ function requestlogs(event, input, data, err) {
     input: input,
     response: data,
   }
-  console.log(JSON.stringify(log));
+  console.log((new Date()).toISOString(), JSON.stringify(log));
 };
 
 module.exports = (req, res, next) => {
