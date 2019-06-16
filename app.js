@@ -3,8 +3,9 @@ const config = require('./config/appConfig');
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const morgan = require('morgan');
 
-const requestLogging = require('./middleware/requestLogs');
+const logger = require('./lib/logger');
 
 // importing routes
 const homeRoute = require('./routes/home');
@@ -12,9 +13,10 @@ const homeRoute = require('./routes/home');
 const app = express();
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
+app.use(morgan(':date[iso] :method :url :status - :response-time ms'));
 
-app.use('/', requestLogging, homeRoute);
+app.use('/', homeRoute);
 
 startServer = http.createServer(app).listen(config.port, () => {
-  console.log('Server started at port: ', config.port);
+  logger.info('Server started at port: ', config.port);
 });
