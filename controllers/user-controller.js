@@ -28,12 +28,14 @@ async function loginUser(user) {
     const passwordMatch = await bcrypt.compare(user.password, userInfo.password);
     if (passwordMatch) {
       token = await auth.setSession(userInfo);
-      return 'logged in: ' + token;
+      return {
+        token,
+      };
     } else {
-      return 'password not matched';
+      throw new Error('password not matched');
     }
   } else {
-    return 'User not found';
+    throw new Error('User not found');
   } 
 }
 

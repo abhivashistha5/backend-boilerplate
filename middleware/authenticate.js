@@ -8,7 +8,7 @@ function autenticate(req, res, next) {
     req.session = session;
     next();
   }).catch((error) => {
-    res.send({ status: 401, message: 'You are not authorized' });
+    res.send({ status: 401, message: 'You are not authorized', data: {}});
   });
 }
 

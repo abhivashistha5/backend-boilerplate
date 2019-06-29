@@ -1,5 +1,4 @@
 const dotenv = require('dotenv').config();
-
 const config = require('./config/appConfig');
 
 const express = require('express');
